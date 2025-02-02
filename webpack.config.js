@@ -24,7 +24,25 @@ module.exports = {
     rules: [{
       test: /\.[tj]sx$/,
       use: ['ts-loader'],
-    }],
+    },
+    {
+      test: /\.scss$/,
+      use: [
+        'style-loader', 
+        {
+          loader: 'css-loader',
+          options: {
+            modules: {
+              mode: 'local',
+              localIdentName: '[name]__[local]--[hash:base64:5]',
+            },
+          },
+        },
+        'sass-loader',
+      ],
+    },
+    
+    ],
   },
   plugins: [
     new HTMLWebpackPlugin({template: path.resolve(__dirname, 'src/index.html')}),
